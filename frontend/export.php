@@ -8,8 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>รายงานข้อมูล</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css">
+    <?php require_once("./components/cssBootstrap.php") ?>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.bootstrap5.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -96,7 +95,7 @@
     <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.colVis.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <?php require_once("./components/jsBootstrap.php") ?>
 </body>
 
 </html>

@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Audit Tools</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <?php require_once("./components/cssBootstrap.php") ?>
     <style>
         .error {
             color: red;
             font-style: italic;
         }
+
         .success {
             display: none;
         }
@@ -47,8 +47,18 @@
                         </div>
                         <!-- row -->
                         <div class="col-sm-6 mt-3">
-                            <label for="company" class="form-label">บริษัท/สังกัดสำนักงาน<span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="company" name="company" placeholder="กรุณากรอกชื่อบริษัท/สังกัดสำนักงาน..." require>
+                            <label for="company" class="form-label">บริษัท/สังกัดสำนักงาน <span class="text-danger">*</span></label>
+                            <!-- <input type="text" class="form-control" id="company" name="company" placeholder="กรณีท่านไม่ได้สังกัดสำนักงาน กรุณาระบุ “อิสระ”" require> -->
+
+
+
+                            <input class="form-control" list="companyOptions" id="company" name="company" placeholder="กรณีท่านไม่ได้สังกัดสำนักงาน กรุณาระบุ “อิสระ”">
+                            <datalist id="companyOptions">
+                                <option value="อิสระ">
+                            </datalist>
+
+
+
                         </div>
                         <div class="col-sm-6 mt-3">
                             <label for="mobile_phone" class="form-label">เบอร์โทรศัพท์มือถือ<span class="text-danger">*</span></label>
@@ -153,7 +163,7 @@
                         </div>
 
                         <div class="col-sm-12 mt-3">
-                            <button type="submit" name="submit" class="btn btn-success w-100">บันทึกข้อมูล เพื่อดาวน์โหลดโปรแกรม</button>
+                            <button type="submit" name="submit" class="btn btn-success w-100 fs-4">บันทึกข้อมูล เพื่อดาวน์โหลดโปรแกรม</button>
                         </div>
 
                     </div> <!-- row -->
@@ -162,9 +172,9 @@
         </div> <!-- card -->
         <?php require_once("./components/footer.php") ?>
     </div> <!-- container -->
+    <?php require_once("./components/jsBootstrap.php") ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $(document).ready(function() {
@@ -184,6 +194,7 @@
                                 url: "../backend/insert.php",
                                 data: $("#form-insert").serialize(),
                                 success: function(response) {
+                                    response = JSON.parse(response);
                                     Swal.fire({
                                         title: 'สำเร็จ',
                                         text: 'เพิ่มข้อมูลเรียบร้อย',
@@ -192,6 +203,9 @@
                                         showConfirmButton: false
                                     });
                                     $('#form-insert')[0].reset();
+                                    window.location.href = "download.php?file=" + response.dlfile;
+                                    // alert(response)
+
                                 },
                             });
                         }
